@@ -36,11 +36,11 @@ def unique_mask_values(idx, mask_dir, mask_suffix):
 
 
 class BasicDataset(Dataset):
-    def __init__(self, images_dir: str, mask_dir: str, scale: float = 1.0, mask_suffix: str = ''):
+    def __init__(self, images_dir: str, mask_dir: str, image_size: tuple, mask_suffix: str = ''):
         self.images_dir = Path(images_dir)
         self.mask_dir = Path(mask_dir)
-        assert 0 < scale <= 1, 'Scale must be between 0 and 1'
-        self.scale = scale
+        #assert 0 < scale <= 1, 'Scale must be between 0 and 1'
+        self.image_size = image_size
         self.mask_suffix = mask_suffix
 
         self.ids = [splitext(file)[0] for file in listdir(images_dir) if isfile(join(images_dir, file)) and not file.startswith('.')]
@@ -62,10 +62,11 @@ class BasicDataset(Dataset):
         return len(self.ids)
 
     @staticmethod
-    def preprocess(mask_values, pil_img, scale, is_mask):
+    def preprocess(mask_values, pil_img, image_size, is_mask):
         w, h = pil_img.size
-        newW, newH = int(scale * w), int(scale * h)
-        assert newW > 0 and newH > 0, 'Scale is too small, resized images would have no pixel'
+        #newW, newH = int(scale * w), int(scale * h)
+        #assert newW > 0 and newH > 0, 'Scale is too small, resized images would have no pixel'
+        newW, newH = image_size
         pil_img = pil_img.resize((newW, newH), resample=Image.NEAREST if is_mask else Image.BICUBIC)
         img = np.asarray(pil_img)
 
@@ -103,8 +104,8 @@ class BasicDataset(Dataset):
         assert img.size == mask.size, \
             f'Image and mask {name} should be the same size, but are {img.size} and {mask.size}'
 
-        img = self.preprocess(self.mask_values, img, self.scale, is_mask=False)
-        mask = self.preprocess(self.mask_values, mask, self.scale, is_mask=True)
+        img = self.preprocess(self.mask_values, img, self.image_size, is_mask=False)
+        mask = self.preprocess(self.mask_values, mask, self.image_size, is_mask=True)
 
         return {
             'image': torch.as_tensor(img.copy()).float().contiguous(),
@@ -113,5 +114,5 @@ class BasicDataset(Dataset):
 
 
 class CarvanaDataset(BasicDataset):
-    def __init__(self, images_dir, mask_dir, scale=1):
-        super().__init__(images_dir, mask_dir, scale, mask_suffix='_mask')
+    def __init__(self, images_dir, mask_dir, image_size=(1918, 1280)):
+        super().__init__(images_dir, mask_dir, image_size, mask_suffix='_mask')
