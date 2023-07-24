@@ -1,3 +1,30 @@
+# ##### Editado por Programador Artificial - Começo \#####
+Este fork faz parte de um estudo realizado para entender como um modelo de segmentação semântica funciona e foi modificado para atender este estudo.
+
+[Vídeo com todas as explicações - Em breve]()
+
+[Repositório principal deste estudo](https://github.com/ProgramadorArtificial/como_IA_funciona)
+
+Os dados utilizados estão na pasta “data” e todos as configurações estão pré-configuradas para executar o treinamento utilizando o arquivo “train.py” e após realizar o treinamento pode ser executado o arquivo “predict.py” (sendo necessário apenas alterar o parâmetro “--model” para o caminho do checkpoint treinado) para realizar segmentações semânticas nas imagens de “data/test”.
+
+Caso deseje realizar os seus próprios treinamentos, serão necessários apenas alterar os parâmetros dos arquivos “train.py” e “predict.py” conforme a necessidade.
+
+Os resultados realizado neste estudo estão na pasta “data/test_results”, contendo a imagem original, máscara de retorno do modelo e imagens cortadas conforme os resultados de cada classe, tendo os seguintes IDs:
+
+| Objeto              | Cor     | ID          |
+| ------------------- |------:  | :----------:|
+| Fundo               | Preto   | 0           |
+| Macaco              | Cinza   | 1           |
+| Gato                | Branco  | 2           |
+| Macaco + Gato       | -       | all_class   |
+
+**OBS** Este estudo teve apenas como objetivo entender o funcionamento de um modelo de segmentação semântica.
+
+## Autor
+* **Programador Artificial** - [GitHub](https://github.com/ProgramadorArtificial) - [YouTube](https://www.youtube.com/@ProgramadorArtificial)
+
+# ##### Editado por Programador Artificial - Fim \#####
+
 # U-Net: Semantic segmentation with PyTorch
 <a href="#"><img src="https://img.shields.io/github/actions/workflow/status/milesial/PyTorch-UNet/main.yml?logo=github&style=for-the-badge" /></a>
 <a href="https://hub.docker.com/r/milesial/unet"><img src="https://img.shields.io/badge/docker%20image-available-blue?logo=Docker&style=for-the-badge" /></a>
