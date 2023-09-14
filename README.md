@@ -1,7 +1,7 @@
 # ##### Editado por Programador Artificial - Começo \#####
 Este fork faz parte de um estudo realizado para entender como um modelo de segmentação semântica funciona e foi modificado para atender este estudo.
 
-[Vídeo com todas as explicações - Em breve]()
+[Vídeo com todas as explicações](https://youtu.be/-N6OtD9kIUo)
 
 [Repositório principal deste estudo](https://github.com/ProgramadorArtificial/como_IA_funciona)
 
