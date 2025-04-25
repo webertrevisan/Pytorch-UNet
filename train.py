@@ -159,8 +159,7 @@ def train_model(
             except:
                 pass
 
-            if save_checkpoint and val_score > best_val_score:  # and epoch > epochs / 3:
-                best_val_score = val_score
+            if save_checkpoint:  # and epoch > epochs / 3:               
                 Path(dir_checkpoint).mkdir(parents=True, exist_ok=True)
                 state_dict = model.state_dict()
                 state_dict['mask_values'] = dataset.mask_values
